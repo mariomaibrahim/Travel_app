@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:travel_app/screens/splach_screen.dart';
 import 'package:travel_app/screens/travel_home_screen.dart';
 import 'package:travel_app/screens/travel_trips_screen.dart';
 import 'package:travel_app/screens/trip_details_screen.dart';
@@ -48,7 +49,8 @@ class MyApp extends StatelessWidget {
       // home: const TravelHomeScreen(),
       initialRoute: '/',
       routes: {
-        '/':(context)=>TravelHomeScreen(),
+        '/':(context)=>SplachScreen(),
+        TravelHomeScreen.screenRoute:(context)=>TravelHomeScreen(),
         TravelTripsScreen.screenRoute:(context)=>TravelTripsScreen(),
         TripDetailsScreen.screenRoute: (context)=>TripDetailsScreen()
       },

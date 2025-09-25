@@ -5,7 +5,7 @@ import 'package:travel_app/widgets/category_item_widget.dart';
 
 class TravelHomeScreen extends StatelessWidget {
   const TravelHomeScreen({super.key});
-
+  static const screenRoute = '/home';
   @override
   Widget build(BuildContext context) {
     return Scaffold(
