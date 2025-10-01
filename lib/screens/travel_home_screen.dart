@@ -10,18 +10,6 @@ class TravelHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[100],
-      appBar: AppBar(
-        title: const Text(
-          "دليلك السياحي",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w700,
-            fontSize: 24,
-
-          ),
-        ),
-        backgroundColor: primaryColor,
-      ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: GridView.builder(
