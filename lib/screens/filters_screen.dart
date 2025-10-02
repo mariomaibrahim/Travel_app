@@ -3,81 +3,102 @@ import 'drawer.dart';
 
 class FiltersScreen extends StatefulWidget {
   static const screenRoute = '/filters';
-  final Function saveFilters;
 
-  const FiltersScreen(this.saveFilters);
+  final Function saveFilters;
+  final Map<String, bool> currentFilters;
+
+  FiltersScreen(this.currentFilters, this.saveFilters);
 
   @override
-  State<FiltersScreen> createState() => _FiltersScreenState();
+  _FiltersScreenState createState() => _FiltersScreenState();
 }
 
 class _FiltersScreenState extends State<FiltersScreen> {
-  var _Summer = false;
-  var _Winter = false;
-  var _Family = false;
+  var _summer = false;
+  var _winter = false;
+  var _family = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _summer = widget.currentFilters['summer'] ?? false;
+    _winter = widget.currentFilters['winter'] ?? false;
+    _family = widget.currentFilters['family'] ?? false;
+  }
+
+  Widget buildSwitchListTile(
+      String title,
+      String subtitle,
+      bool currentValue,
+      ValueChanged<bool> updateValue,
+      ) {
+    return SwitchListTile(
+      title: Text(title),
+      subtitle: Text(subtitle),
+      value: currentValue,
+      onChanged: updateValue,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('الفلترة'),
+        title: Text('الفلترة'),
         actions: [
           IconButton(
+            icon: Icon(Icons.save),
             onPressed: () {
               final selectedFilters = {
-                'summer': false,
-                'winter': false,
-                'family': false,
+                'summer': _summer,
+                'winter': _winter,
+                'family': _family,
               };
               widget.saveFilters(selectedFilters);
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text('تم حفظ الفلاتر'),
+                  duration: Duration(seconds: 2),
+                ),
+              );
             },
-            icon: const Icon(Icons.save),
           ),
         ],
       ),
-      drawer: const AppDrawer(),
+      drawer: AppDrawer(),
       body: Column(
         children: [
-          const SizedBox(height: 30),
+          SizedBox(height: 50),
           Expanded(
             child: ListView(
               children: [
-                SwitchListTile(
-                  title: const Text(
-                    'الرحلات الصيفية',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: const Text('إظهار الرحلات في فصل الصيف فقط'),
-                  value: _Summer,
-                  onChanged: (newValue) {
+                buildSwitchListTile(
+                  'الرحلات الصيفية فقط',
+                  'إظهار الرحلات في فصل الصيف فقط',
+                  _summer,
+                      (newValue) {
                     setState(() {
-                      _Summer = newValue;
+                      _summer = newValue;
                     });
                   },
                 ),
-                SwitchListTile(
-                  title: const Text(
-                    'الرحلات الشتوية',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: const Text('إظهار الرحلات في فصل الشتاء فقط'),
-                  value: _Winter,
-                  onChanged: (newValue) {
+                buildSwitchListTile(
+                  'الرحلات الشتوية فقط',
+                  'إظهار الرحلات في فصل الشتاء فقط',
+                  _winter,
+                      (newValue) {
                     setState(() {
-                      _Winter = newValue;
+                      _winter = newValue;
                     });
                   },
                 ),
-                SwitchListTile(
-                  title: const Text(
-                    'الرحلات العائلية',
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                  ),
-                  subtitle: const Text('إظهار الرحلات العائلية فقط'),
-                  value: _Family,
-                  onChanged: (newValue) {
+                buildSwitchListTile(
+                  'للعائلات',
+                  'إظهار الرحلات التي للعائلات فقط',
+                  _family,
+                      (newValue) {
                     setState(() {
-                      _Family = newValue;
+                      _family = newValue;
                     });
                   },
                 ),

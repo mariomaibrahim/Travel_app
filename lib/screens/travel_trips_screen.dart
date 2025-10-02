@@ -57,7 +57,7 @@ class _TravelTripsScreenState extends State<TravelTripsScreen> {
             tripType: trip.tripType,
             season: trip.season,
             id: trip.id,
-            remove: _removeTrip,
+            // remove: _removeTrip,
           );
         },
       ),

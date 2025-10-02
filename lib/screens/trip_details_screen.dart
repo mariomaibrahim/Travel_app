@@ -5,7 +5,14 @@ import 'package:travel_app/utils/colors.dart';
 class TripDetailsScreen extends StatelessWidget {
   static const screenRoute = '/trip_details';
 
-  const TripDetailsScreen({super.key});
+  final void Function(String tripId) manageFavorite;
+  final bool Function(String tripId) isFavorite;
+
+  const TripDetailsScreen({
+    super.key,
+    required this.manageFavorite,
+    required this.isFavorite,
+  });
 
   Widget buildSectionTitle(BuildContext context, String titleText) {
     return Container(
@@ -34,7 +41,7 @@ class TripDetailsScreen extends StatelessWidget {
             color: Colors.black12,
             blurRadius: 8,
             offset: Offset(0, 4),
-          )
+          ),
         ],
       ),
       child: child,
@@ -49,9 +56,13 @@ class TripDetailsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
+        backgroundColor: primaryColor,
         title: Text(
           selectedTrip.title,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+            color: Colors.white, // ← العنوان بالأبيض
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -76,22 +87,28 @@ class TripDetailsScreen extends StatelessWidget {
             buildSectionTitle(context, "الأنشطة"),
             buildListView(
               ListView.separated(
+                itemCount: selectedTrip.activities.length,
+                separatorBuilder: (context, index) => const Divider(),
                 itemBuilder: (context, index) => ListTile(
-                  leading: const Icon(Icons.check_circle_outline, color: primaryColor),
+                  leading: const Icon(
+                    Icons.check_circle_outline,
+                    color: primaryColor,
+                  ),
                   title: Text(
                     selectedTrip.activities[index],
                     style: const TextStyle(fontSize: 16),
                     textDirection: TextDirection.rtl,
                   ),
                 ),
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: selectedTrip.activities.length,
+                physics: const NeverScrollableScrollPhysics(),
               ),
             ),
             const SizedBox(height: 20),
             buildSectionTitle(context, "البرنامج اليومي"),
             buildListView(
               ListView.separated(
+                itemCount: selectedTrip.program.length,
+                separatorBuilder: (context, index) => const Divider(),
                 itemBuilder: (context, index) => ListTile(
                   leading: CircleAvatar(
                     backgroundColor: primaryColor,
@@ -106,17 +123,21 @@ class TripDetailsScreen extends StatelessWidget {
                     textDirection: TextDirection.rtl,
                   ),
                 ),
-                separatorBuilder: (context, index) => const Divider(),
-                itemCount: selectedTrip.program.length,
+                physics: const NeverScrollableScrollPhysics(),
               ),
             ),
             const SizedBox(height: 40),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(child: Icon(Icons.delete,),onPressed: (){
-        Navigator.of(context).pop(tripId);
-      },),
+      floatingActionButton: FloatingActionButton(
+        backgroundColor: primaryColor,
+        child: Icon(
+          Icons.star,
+          color: isFavorite(tripId) ? Colors.yellow : Colors.white,
+        ),
+        onPressed: () => manageFavorite(tripId),
+      ),
     );
   }
 }
