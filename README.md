@@ -1,16 +1,22 @@
-# travel_app
+# 🌟 سفاري — Safari
 
-A new Flutter project.
+![Mockup الهاتف](assets/screen.png)
 
-## Getting Started
+## نبذة
+سفاري هو تطبيق رحلات وسياحة يساعد المستخدمين في اكتشاف الوجهات، حجز رحلات، ومتابعة أنشطتهم المفضلة — تصميمه بسيط، سريع، ومصمم للاستخدام العربي.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## ✨ مميزات رئيسية
+- عرض تصنيفات الوجهات (جبال، شواطئ، صحارى، ...).  
+- صفحات تفاصيل لكل رحلة مع صور ووصف ووقت الرحلة.  
+- إمكانية تفضيل الرحلات وحفظها.  
+- إعدادات بسيطة للتحكم في فلترة التصنيفات.  
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+---
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## 📸 لقطات (Screenshots)
+
+![شاشة رئيسية](assets/mockup.png)
+*لقطة توضيحية لواجهة التطبيق داخل إطار موبايل.*
+
