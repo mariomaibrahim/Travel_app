@@ -5,7 +5,7 @@ Your travel companion — explore destinations, plan trips, and enjoy a smooth u
 ---
 
 ## 📸 Screenshots
-![App Screenshot](assets/mockup.png)
+![App Screenshot](assets/IMG-20251002-WA0093.jpg)
 
 ---
 
