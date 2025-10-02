@@ -1,23 +1,23 @@
-# 📱 تطبيق سفاري
+# 📱 Safari App
 
-رحلاتك السياحية في جيبك — اكتشف أماكن جديدة، خطط لرحلتك، واستمتع بتجربة سهلة وسريعة.
-
----
-
-## 📸 صور من التطبيق
-![لقطة من التطبيق](assets/mockup.png)
+Your travel companion — explore destinations, plan trips, and enjoy a smooth user experience.
 
 ---
 
-## ✨ المميزات
-- استكشاف الوجهات حسب التصنيف (جبال، شواطئ، صحارى...).
-- تفاصيل الرحلات مع صور ووصف.
-- حفظ الرحلات المفضلة.
-- إعدادات إشعارات بسيطة وفعالة.
+## 📸 Screenshots
+![App Screenshot](assets/mockup.png)
 
 ---
 
-## 🚀 التشغيل
+## ✨ Features
+- Browse destinations by categories (Mountains, Beaches, Deserts…).
+- Detailed trip pages with images and descriptions.
+- Save favorite trips.
+- Equipped with filter settings 
+
+---
+
+## 🚀 Getting Started
 ```bash
 git clone https://github.com/<username>/<repo>.git
 cd <repo>
