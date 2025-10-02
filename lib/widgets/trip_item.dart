@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:travel_app/screens/trip_details_screen.dart';
-
 import '../models/trips_model.dart';
 
 class TripItem extends StatelessWidget {
@@ -12,6 +11,7 @@ class TripItem extends StatelessWidget {
     required this.tripType,
     required this.season,
     required this.id,
+    required this.remove,
   });
 
   final String title;
@@ -20,7 +20,7 @@ class TripItem extends StatelessWidget {
   final int duration;
   final TripType tripType;
   final Season season;
-
+  final void Function(String) remove;
 
   String get seasonText {
     switch (season) {
@@ -37,7 +37,6 @@ class TripItem extends StatelessWidget {
     }
   }
 
-
   String get tripTypeText {
     switch (tripType) {
       case TripType.Activities:
@@ -50,13 +49,21 @@ class TripItem extends StatelessWidget {
         return 'غير معروف';
     }
   }
-void selectTrip(BuildContext context){
-    Navigator.of(context).pushNamed(TripDetailsScreen.screenRoute,arguments: id);
-}
+
+  void selectTrip(BuildContext context) {
+    Navigator.of(context)
+        .pushNamed(TripDetailsScreen.screenRoute, arguments: id)
+        .then((result) {
+      if (result != null && result is String) {
+        remove(result);
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: ()=>selectTrip(context),
+      onTap: () => selectTrip(context),
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         elevation: 4,
@@ -64,9 +71,9 @@ void selectTrip(BuildContext context){
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+              borderRadius:
+              const BorderRadius.vertical(top: Radius.circular(20)),
               child: Image.network(
                 imageUrl,
                 height: 200,
@@ -74,20 +81,16 @@ void selectTrip(BuildContext context){
                 fit: BoxFit.cover,
               ),
             ),
-
-
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              padding: const EdgeInsets.all(16),
               child: Text(
                 title,
-                style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.start,
+                style:
+                const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
             ),
-
-
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -126,9 +129,16 @@ class TripDetailRow extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Icon(icon, size: 20, color: Colors.grey[600],fontWeight: FontWeight.bold,),
+        Icon(icon, size: 20, color: Colors.grey[600]),
         const SizedBox(width: 8),
-        Text(label, style: TextStyle(fontSize: 14, color: Colors.grey[500],fontWeight: FontWeight.bold)),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: 14,
+            color: Colors.grey[500],
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ],
     );
   }
